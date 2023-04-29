@@ -18,6 +18,14 @@ export default function App() {
     return {value: Math.ceil(Math.random() * 6), isHeld: false, id: nanoid()}
   }
 
+  function rollDice(){
+    setDice(prevDice => prevDice.map(die => {
+      return die.isHeld ?
+              die:
+              createDie() 
+    }))
+  }
+
   function holdDice(id){
     console.log("clicked......")
     setDice(prevDice => prevDice.map(die => {
@@ -36,6 +44,7 @@ export default function App() {
       <div className="dice">
         {diceElements}
       </div>
+      <button className="roll-dice" onClick={rollDice}>Roll Dice</button>
     </main>
   )
 }
