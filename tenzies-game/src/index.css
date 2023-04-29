@@ -5,24 +5,36 @@
 body{
   margin: 0;
   background: #0B2434;
-  padding: 30px;
+  padding: 50px;
   font-family: 'Karla', sans-serif;
 }
 
 .main{
   background: #F5F5F5;
-  height: 650px;
+  height: 600px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+.title{
+  font-size: 60px;
+  margin: 0;
+}
+
+.instructions {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  margin-top: 0;
+  text-align: center;
+}
 
 .dice{
   display: grid;
   grid-template: auto auto / repeat(5, 1fr);
   gap: 60px;
+  padding: 50px;
 }
 
 .die-face{
@@ -35,6 +47,7 @@ body{
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  padding: 20px;
 }
 
 .die-value{
@@ -42,11 +55,13 @@ body{
 }
 
 .roll-dice{
-  width: 90px;
-  height: 50px;
-  margin-top: 50px;
+  width: 150px;
+  height: 70px;
+  margin-top: 20px;
   background: #5035FF;
   color: white;
   border: none;
   border-radius: 8px;
+  font-family: 'Karla', sans-serif;
+  font-size: 1.8rem;
 }
