@@ -1,6 +1,9 @@
-export default function Die(){
+export default function Die(props) {
     return (
-        <main className="main">
-        </main>
+
+        <div className="die-face">
+            <h2 className="die-value">{props.value}</h2>
+        </div>
+
     )
 }
