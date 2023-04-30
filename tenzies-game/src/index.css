@@ -8,6 +8,11 @@ body{
   padding: 50px;
   font-family: 'Karla', sans-serif;
 }
+.metrics{
+  position: absolute;
+  left: 60px;
+  top: 50px;
+}
 
 .main{
   background: #F5F5F5;
@@ -64,4 +69,6 @@ body{
   border-radius: 8px;
   font-family: 'Karla', sans-serif;
   font-size: 1.8rem;
+  cursor: pointer;
 }
+

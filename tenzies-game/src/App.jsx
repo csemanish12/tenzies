@@ -7,9 +7,10 @@ export default function App() {
   console.log("rerendering")
   const [dice, setDice] = React.useState(getAllNewDice())
   const [isTenzies, setIsTenzies] = React.useState(false)
+  const [counter, setCounter] = React.useState(0)
+  const [highScore, setHighScore] = React.useState(localStorage.getItem("high-score"))
 
   React.useEffect(() => {
-    console.log("re-rendering......")
     const dieValue = dice[0].value
     let isWon = true
     for (let i = 0; i < dice.length; i++) {
@@ -24,6 +25,16 @@ export default function App() {
     if (isWon) {
       console.log("you have won")
       setIsTenzies(true)
+      setHighScore(prevHighScore => {
+        if (prevHighScore === null || counter < prevHighScore){
+          localStorage.setItem("high-score", counter)
+          return counter
+        }
+        else {
+          
+          return prevHighScore
+        } 
+      })
     }
 
   }, [dice])
@@ -43,6 +54,7 @@ export default function App() {
 
   function rollDice() {
     if (!isTenzies) {
+      setCounter(prevCounter => prevCounter + 1)
       setDice(prevDice => prevDice.map(die => {
         return die.isHeld ?
           die :
@@ -51,11 +63,11 @@ export default function App() {
     } else {
       setIsTenzies(false)
       setDice(getAllNewDice())
+      setCounter(0)
     }
   }
 
   function holdDice(id) {
-    console.log("clicked......")
     setDice(prevDice => prevDice.map(die => {
       return die.id === id ?
         { ...die, isHeld: !die.isHeld } :
@@ -68,14 +80,21 @@ export default function App() {
 
 
   return (
-    <main className="main">
-      {isTenzies && <Confetti />}
-      <h1 className="title">Tenzies</h1>
-      <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
-      <div className="dice">
-        {diceElements}
+    <div>
+      <div className="metrics">
+        <h2 className="current-count">Dice Rolled: {counter} times</h2>
+        <h2 className="highscore">High Score: {highScore ? highScore: 0} times</h2>
       </div>
-      <button className="roll-dice" onClick={rollDice}>{isTenzies ? "New Game" : "Roll Dice"}</button>
-    </main>
+      <main className="main">
+        {isTenzies && <Confetti />}
+
+        <h1 className="title">Tenzies</h1>
+        <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+        <div className="dice">
+          {diceElements}
+        </div>
+        <button className="roll-dice" onClick={rollDice}>{isTenzies ? "New Game" : "Roll Dice"}</button>
+      </main>
+    </div>
   )
 }
